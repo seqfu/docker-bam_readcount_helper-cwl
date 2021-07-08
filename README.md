@@ -1,7 +1,9 @@
 bam_readcount_helper-cwl
 ========================
 
-Ubuntu Focal-based Docker image with `bam-readcount` and helper script
+This branch is for `bam-readcount`-only images.
+
+Dockers image with `bam-readcount` for Ubuntu Focal and Alpine latest
 
 
 Resources
@@ -14,10 +16,9 @@ https://github.com/genome/bam-readcount
 Usage
 -----
 
-`bam-readcount` and the helper script are installed as
+`bam-readcount` is installed as
 
     /usr/bin/bam-readcount
-    /usr/bin/bam_readcount_helper.py
 
 
 
