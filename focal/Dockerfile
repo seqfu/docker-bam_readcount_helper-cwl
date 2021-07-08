@@ -1,4 +1,5 @@
 FROM ubuntu:focal
+MAINTAINER Ajay Khanna <appliedstochastics@gmail.com>
 
 # tzdata config from https://stackoverflow.com/a/47909037
 ENV DEBIAN_FRONTEND noninteractive
@@ -25,42 +26,16 @@ RUN cd / && \
     make
 
 
-# By adding zlib1g-dev don't appear to need mgibio/samtools:1.3.1 as a base
 FROM ubuntu:focal
-MAINTAINER John Garza <johnegarza@wustl.edu>
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 LABEL \
     description="Image supporting the bam-readcount program"
 
-RUN apt-get update && \
-    apt-get install -y \
-        cmake \
-	libcurl4-openssl-dev \
-	libssl-dev \
-        patch \
-        python-is-python3 \
-        python3 \
-        python3-pip \
-        git \
-        automake \
-        autoconf \
-        libbz2-dev \
-        liblzma-dev \
-        zlib1g-dev
+RUN apt-get update
 
-ENV SAMTOOLS_ROOT=/opt/samtools
 RUN mkdir -p /opt/bam-readcount/bin
-
 WORKDIR /opt/bam-readcount
 COPY --from=0 /bam-readcount/build/bin/bam-readcount /opt/bam-readcount/bin/bam-readcount
 RUN ln -s /opt/bam-readcount/bin/bam-readcount /usr/bin/bam-readcount
-
-COPY bam_readcount_helper.py /usr/bin/bam_readcount_helper.py
-
-RUN pip3 install cyvcf2
-
-
-#clear inherited entrypoint
-ENTRYPOINT []

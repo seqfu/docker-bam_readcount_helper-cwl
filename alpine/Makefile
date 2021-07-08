@@ -1,4 +1,4 @@
-NAME   := seqfu/bam_readcount_helper-cwl:1.1.1-samtools-1.10
+NAME   := seqfu/alpine-bam_readcount
 IMG    := ${NAME}
 LATEST := ${NAME}
 HOST   := $$(basename ${NAME})
@@ -10,6 +10,9 @@ build:
  
 push:
 	@docker push ${NAME}
+
+run:
+	docker run --rm --hostname ${HOST} ${LATEST} bam-readcount
 
 interact:
 	docker run --rm --hostname ${HOST} --detach-keys="ctrl-@" -t -i ${LATEST} /bin/bash
