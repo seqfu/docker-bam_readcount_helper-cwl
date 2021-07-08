@@ -31,7 +31,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 LABEL \
-    description="Image supporting the bam-readcount program"
+    description="Ubuntu Focal with bam-readcount"
 
 RUN apt-get update
 
